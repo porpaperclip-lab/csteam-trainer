@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Load html2canvas to enable saving as image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+        /* Ensure the capture area has a fixed width for perfect poster layout regardless of screen size */
+        #capture-area {
+            width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 min-h-screen pt-8 pb-24 overflow-x-auto">
+
+    <!-- Action Bar (Will not be included in the image) -->
+    <div id="action-bar" class="w-full max-w-[1200px] mx-auto mb-6 flex flex-col items-center justify-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+        <h2 class="text-xl font-bold text-slate-800 mb-4">คลิกปุ่มด้านล่างเพื่อบันทึกเป็นรูปภาพ</h2>
+        <button onclick="downloadAsImage()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95 text-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            📸 ดาวน์โหลดเป็นรูปภาพ (Download Image)
+        </button>
+        <p class="text-sm text-slate-500 mt-3">*ระบบจะทำการสร้างไฟล์ .png ความละเอียดสูงให้ทันที (ข้อมูลครบถ้วนแน่นอน)</p>
+    </div>
+
+    <!-- The actual area that will be converted to an image -->
+    <div id="capture-area" class="bg-slate-50 p-12 rounded-3xl shadow-sm">
+        
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <div class="inline-block bg-slate-800 text-white px-6 py-2 rounded-full text-sm font-bold tracking-widest mb-4">SUNDAY GROUP</div>
+            <h1 class="text-5xl font-extrabold text-slate-800 mb-3 tracking-tight">Product & Partner Structure</h1>
+            <p class="text-xl text-slate-500 font-medium">โครงสร้างผลิตภัณฑ์และช่องทางการจัดจำหน่าย</p>
+        </div>
+
+        <div class="space-y-8">
+            
+            <!-- 1. PRODUCT MOTOR -->
+            <div class="bg-white rounded-3xl shadow-sm border border-blue-100 overflow-hidden">
+                <div class="px-8 py-5 flex items-center gap-4 bg-blue-50 border-b border-blue-100">
+                    <div class="p-3 bg-white rounded-xl shadow-sm text-blue-700">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-blue-800">Product Motor</h2>
+                </div>
+                <div class="grid grid-cols-3 divide-x divide-slate-100">
+                    <!-- SITH -->
+                    <div class="p-8">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">ซันเดย์ประกันภัย [SITH]</h3><p class="text-sm font-medium text-slate-500">(Sunday Insurance)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-022-1111</p></div>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Sunday Ins.</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Lada Broker</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Lotus Broker</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Proac Broker</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Srikrung Broker</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Torkun Broker</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">TQM Broker</span></li>
+                        </ul>
+
+                        <!-- Note Block -->
+                        <div class="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
+                            <svg class="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <p class="text-sm text-slate-600 leading-relaxed"><strong class="text-slate-700">Note:</strong> แจ้งเคลม / ติดตามเคลม / แจ้งผลประโยชน์ / แจ้งข้อมูล กธ. / รับเรื่องแก้ไขข้อมูล กธ.</p>
+                        </div>
+                    </div>
+                    <!-- SDI -->
+                    <div class="p-8">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="m9 12 2 2 4-4"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">ซันเดย์โบรกเกอร์ [SDI]</h3><p class="text-sm font-medium text-slate-500">(Sunday Ins.)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-026-3355</p></div>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Sunday Insurance</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Bangkok Insurance</span></li>
+                        </ul>
+                        <div class="p-4 rounded-2xl border bg-amber-50/50 border-amber-200">
+                            <div class="flex items-center gap-2 mb-3 text-amber-800">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg>
+                                <span class="text-sm font-bold uppercase tracking-wider">ภายใต้ "Dsurance"</span>
+                            </div>
+                            <ul class="space-y-2">
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">Bangkok Insurance (พรบ.)</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Note Block -->
+                        <div class="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
+                            <svg class="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <p class="text-sm text-slate-600 leading-relaxed"><strong class="text-slate-700">Note:</strong> ให้ข้อมูลผลิตภัณฑ์ / แจ้งเคลม / ติดตามเคลม / แจ้งผลประโยชน์ / แจ้งข้อมูล กธ. / รับเรื่องแก้ไขข้อมูล กธ.</p>
+                        </div>
+                    </div>
+                    <!-- CCH -->
+                    <div class="p-8 flex flex-col">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">เครสเซนท์ เฮลท์ [CCH]</h3><p class="text-sm font-medium text-slate-500">(Crescent Health)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-003-8532</p></div>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center justify-center py-6 text-slate-300">
+                            <svg class="w-10 h-10 mb-2 opacity-30" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            <span class="text-base font-medium">ไม่มีข้อมูล (None)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. PRODUCT HEALTH -->
+            <div class="bg-white rounded-3xl shadow-sm border border-rose-100 overflow-hidden">
+                <div class="px-8 py-5 flex items-center gap-4 bg-rose-50 border-b border-rose-100">
+                    <div class="p-3 bg-white rounded-xl shadow-sm text-rose-700">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-rose-800">Product Health / Life</h2>
+                </div>
+                <div class="grid grid-cols-3 divide-x divide-slate-100">
+                    <!-- SITH -->
+                    <div class="p-8">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">ซันเดย์ประกันภัย [SITH]</h3><p class="text-sm font-medium text-slate-500">(Sunday Insurance)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-022-1111</p></div>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Sunday Ins.</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Shopee</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">9Singha Broker</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">AOK Broker</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Buddy D Broker</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">TLG Broker</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Next PT Broker</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">PP Glory Broker</span></li>
+                        </ul>
+
+                        <!-- Note Block -->
+                        <div class="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
+                            <svg class="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <p class="text-sm text-slate-600 leading-relaxed"><strong class="text-slate-700">Note:</strong> ติดตามเคลม / แจ้งผลประโยชน์/ แจ้งข้อมูล กธ. / แก้ไขข้อมูล</p>
+                        </div>
+                    </div>
+                    <!-- SDI -->
+                    <div class="p-8">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">ซันเดย์โบรกเกอร์ [SDI]</h3><p class="text-sm font-medium text-slate-500">(Sunday Ins.)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-026-3355</p></div>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Sunday Insurance</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">AXA Insurance</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Dhipaya Insurance</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Muangthai Insurance</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">FWD Insurance</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Bangkok Insurance</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">SE Life (SOUTHEAST LIFE INSURANCE)</span></li>
+                        </ul>
+                        <div class="p-4 rounded-2xl border bg-amber-50/50 border-amber-200">
+                            <div class="flex items-center gap-2 mb-3 text-amber-800">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg>
+                                <span class="text-sm font-bold uppercase tracking-wider">ภายใต้ "Dsurance"</span>
+                            </div>
+                            <ul class="space-y-2.5">
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">Muangthai Insurance</span></li>
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">Dhipaya Insurance</span></li>
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">Chubb Samaggi Insurance</span></li>
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">Bangkok Insurance</span></li>
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">FWD Insurance</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Note Block -->
+                        <div class="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
+                            <svg class="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <p class="text-sm text-slate-600 leading-relaxed"><strong class="text-slate-700">Note:</strong> ให้ข้อมูลผลิตภัณฑ์ / ตรวจสอบการซื้อ / รับเรื่องประสานงานบ้านประกัน</p>
+                        </div>
+                    </div>
+                    <!-- CCH -->
+                    <div class="p-8 flex flex-col">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">เครสเซนท์ เฮลท์ [CCH]</h3><p class="text-sm font-medium text-slate-500">(Crescent Health)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-003-8532</p></div>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Sunday Insurance</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">(NTL) AXA Insurance</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">(PTTAC) Self insure</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">(PROFESSIONAL) Self insure</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">(RBL) Rabbit Life</span></li>
+                        </ul>
+
+                        <!-- Note Block -->
+                        <div class="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
+                            <svg class="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <p class="text-sm text-slate-600 leading-relaxed"><strong class="text-slate-700">Note:</strong> ติดตามเคลม / แจ้งผลประโยชน์/ แจ้งข้อมูล กธ. / ประสานงานแก้ไขข้อมูล</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. PRODUCT GADGET -->
+            <div class="bg-white rounded-3xl shadow-sm border border-violet-100 overflow-hidden">
+                <div class="px-8 py-5 flex items-center gap-4 bg-violet-50 border-b border-violet-100">
+                    <div class="p-3 bg-white rounded-xl shadow-sm text-violet-700">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-violet-800">Product Gadget</h2>
+                </div>
+                <div class="grid grid-cols-3 divide-x divide-slate-100">
+                    <!-- SITH -->
+                    <div class="p-8 flex flex-col">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">ซันเดย์ประกันภัย [SITH]</h3><p class="text-sm font-medium text-slate-500">(Sunday Insurance)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-022-1111</p></div>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center justify-center py-6 text-slate-300">
+                            <svg class="w-10 h-10 mb-2 opacity-30" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            <span class="text-base font-medium">ไม่มีข้อมูล (None)</span>
+                        </div>
+                    </div>
+                    <!-- SDI -->
+                    <div class="p-8 flex flex-col">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">ซันเดย์โบรกเกอร์ [SDI]</h3><p class="text-sm font-medium text-slate-500">(Sunday Ins.)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-026-3355</p></div>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">S Leasing</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">M-Leasing</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Dtac Mobile care</span></li>
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">Sunday Gadget Care</span></li>
+                        </ul>
+
+                        <!-- Note Block -->
+                        <div class="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
+                            <svg class="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <p class="text-sm text-slate-600 leading-relaxed"><strong class="text-slate-700">Note:</strong> แจ้งเคลม / ติดตามเคลม / ให้ข้อมูลผลิตภัณฑ์ / แจ้งความคุ้มครอง / แก้ไขข้อมูล </p>
+                        </div>
+                    </div>
+                    <!-- CCH -->
+                    <div class="p-8 flex flex-col">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">เครสเซนท์ เฮลท์ [CCH]</h3><p class="text-sm font-medium text-slate-500">(Crescent Health)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-003-8532</p></div>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center justify-center py-6 text-slate-300">
+                            <svg class="w-10 h-10 mb-2 opacity-30" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            <span class="text-base font-medium">ไม่มีข้อมูล (None)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. PRODUCT TRAVEL -->
+            <div class="bg-white rounded-3xl shadow-sm border border-teal-100 overflow-hidden">
+                <div class="px-8 py-5 flex items-center gap-4 bg-teal-50 border-b border-teal-100">
+                    <div class="p-3 bg-white rounded-xl shadow-sm text-teal-700">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.2-1.1.6L3 8l6 5.5L6.5 16l-3.2-.8c-.3-.1-.6.1-.8.4L2 17l4.5 2.5L9 24l1.4-.5c.3-.1.5-.4.4-.8l-.8-3.2 2.5-2.5 5.5 6 1.2-.7c.4-.2.7-.6.6-1.1Z"/></svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-teal-800">Product Travel</h2>
+                </div>
+                <div class="grid grid-cols-3 divide-x divide-slate-100">
+                    <!-- SITH -->
+                    <div class="p-8 flex flex-col">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">ซันเดย์ประกันภัย [SITH]</h3><p class="text-sm font-medium text-slate-500">(Sunday Insurance)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-022-1111</p></div>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center justify-center py-6 text-slate-300">
+                            <svg class="w-10 h-10 mb-2 opacity-30" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            <span class="text-base font-medium">ไม่มีข้อมูล (None)</span>
+                        </div>
+                    </div>
+                    <!-- SDI -->
+                    <div class="p-8">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">ซันเดย์โบรกเกอร์ [SDI]</h3><p class="text-sm font-medium text-slate-500">(Sunday Ins.)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-026-3355</p></div>
+                        </div>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start gap-3"><svg class="w-5 h-5 mt-0.5 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg><span class="text-base text-slate-700 font-medium">MSIG Insurance</span></li>
+                        </ul>
+                        <div class="p-4 rounded-2xl border bg-amber-50/50 border-amber-200">
+                            <div class="flex items-center gap-2 mb-3 text-amber-800">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg>
+                                <span class="text-sm font-bold uppercase tracking-wider">ภายใต้ "Dsurance"</span>
+                            </div>
+                            <ul class="space-y-2.5">
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">MSIG Insurance</span></li>
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">Tune Protect Insurance</span></li>
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">AXA Insurance</span></li>
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">Chubb Samaggi Insurance</span></li>
+                                <li class="flex items-start gap-2 text-amber-900"><div class="w-2 h-2 rounded-full mt-2 bg-amber-400"></div><span class="text-base font-semibold">Allianz Ayudhya General Insurance</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Note Block -->
+                        <div class="mt-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex gap-3 items-start">
+                            <svg class="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                            <p class="text-sm text-slate-600 leading-relaxed"><strong class="text-slate-700">Note:</strong> ให้ข้อมูลผลิตภัณฑ์ / ตรวจสอบการซื้อ / รับเรื่องประสานงานบ้านประกัน</p>
+                        </div>
+                    </div>
+                    <!-- CCH -->
+                    <div class="p-8 flex flex-col">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            <div><h3 class="text-lg font-bold text-slate-800">เครสเซนท์ เฮลท์ [CCH]</h3><p class="text-sm font-medium text-slate-500">(Crescent Health)</p><p class="text-sm font-medium text-slate-500 mt-0.5">02-003-8532</p></div>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center justify-center py-6 text-slate-300">
+                            <svg class="w-10 h-10 mb-2 opacity-30" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            <span class="text-base font-medium">ไม่มีข้อมูล (None)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script for converting HTML to Image -->
+    <script>
+        function downloadAsImage() {
+            const captureArea = document.getElementById('capture-area');
+            const btn = document.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            // Show loading state
+            btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> กำลังประมวลผลรูปภาพ...`;
+            btn.disabled = true;
+
+            // แก้ปัญหาภาพขาด: บันทึกตำแหน่ง Scroll ปัจจุบัน และเลื่อนขึ้นไปบนสุดชั่วคราวก่อนจับภาพ
+            const currentScroll = window.scrollY;
+            window.scrollTo(0, 0);
+
+            // Generate Canvas
+            html2canvas(captureArea, {
+                scale: 4, // เพิ่มความละเอียดเป็น 4 เท่า
+                backgroundColor: '#f8fafc',
+                logging: false,
+                useCORS: true,
+                scrollY: 0,
+                scrollX: 0,
+                windowWidth: 1200,
+                windowHeight: captureArea.scrollHeight // บังคับความสูงให้ครอบคลุมเนื้อหาที่แท้จริงทั้งหมด
+            }).then(canvas => {
+                // Convert to image and download
+                const link = document.createElement('a');
+                link.download = 'Sunday-Product-Structure.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                // Restore button state and scroll position
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                window.scrollTo(0, currentScroll);
+            }).catch(err => {
+                console.error("Error generating image: ", err);
+                alert("เกิดข้อผิดพลาดในการสร้างรูปภาพ กรุณาลองใหม่อีกครั้ง");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                window.scrollTo(0, currentScroll);
+            });
+        }
+    </script>
+</body>
+</html>
