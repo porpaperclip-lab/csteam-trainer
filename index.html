@@ -5,30 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Load html2canvas to enable saving as image -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
     <style>
+        :root {
+            --primary-color: #1a73e8;
+            --card-bg: #ffffff;
+            --text-muted: #5f6368;
+        }
+
         body { font-family: 'Prompt', sans-serif; }
+        
         /* Ensure the capture area has a fixed width for perfect poster layout regardless of screen size */
         #capture-area {
             width: 1200px;
             margin: 0 auto;
         }
+
+        /* ================= Style สำหรับแถบเมนู (Navbar) ================= */
+        .navbar {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: fixed; /* ติดขอบจอด้านบนเสมอ */
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 20px;
+            z-index: 1000;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif; /* ให้ฟอนต์เข้ากับหน้านี้ */
+        }
+
+        .navbar a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #e8eaed;
+            color: var(--primary-color);
+        }
+
+        .navbar a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        /* ================================================================= */
     </style>
 </head>
-<body class="bg-gray-200 min-h-screen pt-8 pb-24 overflow-x-auto">
+<body class="bg-gray-200 min-h-screen pt-24 pb-12 overflow-x-auto">
 
-    <!-- Action Bar (Will not be included in the image) -->
-    <div id="action-bar" class="w-full max-w-[1200px] mx-auto mb-6 flex flex-col items-center justify-center bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <h2 class="text-xl font-bold text-slate-800 mb-4">คลิกปุ่มด้านล่างเพื่อบันทึกเป็นรูปภาพ</h2>
-        <button onclick="downloadAsImage()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg flex items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95 text-lg">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-            📸 ดาวน์โหลดเป็นรูปภาพ (Download Image)
-        </button>
-        <p class="text-sm text-slate-500 mt-3">*ระบบจะทำการสร้างไฟล์ .png ความละเอียดสูงให้ทันที (ข้อมูลครบถ้วนแน่นอน)</p>
-    </div>
+    <!-- ================= ส่วนของแถบเมนูด้านบน ================= -->
+    <nav class="navbar">
+        <a href="index.html">🏠 หน้าแรก</a>
+        <a href="link-to-other-page.html">📞 ติดต่อทีมงาน</a>
+        <a href="#" class="active">📊 โครงสร้างผลิตภัณฑ์</a>
+    </nav>
+    <!-- ======================================================== -->
 
-    <!-- The actual area that will be converted to an image -->
+    <!-- The actual area of the content -->
     <div id="capture-area" class="bg-slate-50 p-12 rounded-3xl shadow-sm">
         
         <!-- Header -->
@@ -319,51 +360,5 @@
 
         </div>
     </div>
-
-    <!-- Script for converting HTML to Image -->
-    <script>
-        function downloadAsImage() {
-            const captureArea = document.getElementById('capture-area');
-            const btn = document.querySelector('button');
-            const originalText = btn.innerHTML;
-            
-            // Show loading state
-            btn.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> กำลังประมวลผลรูปภาพ...`;
-            btn.disabled = true;
-
-            // แก้ปัญหาภาพขาด: บันทึกตำแหน่ง Scroll ปัจจุบัน และเลื่อนขึ้นไปบนสุดชั่วคราวก่อนจับภาพ
-            const currentScroll = window.scrollY;
-            window.scrollTo(0, 0);
-
-            // Generate Canvas
-            html2canvas(captureArea, {
-                scale: 4, // เพิ่มความละเอียดเป็น 4 เท่า
-                backgroundColor: '#f8fafc',
-                logging: false,
-                useCORS: true,
-                scrollY: 0,
-                scrollX: 0,
-                windowWidth: 1200,
-                windowHeight: captureArea.scrollHeight // บังคับความสูงให้ครอบคลุมเนื้อหาที่แท้จริงทั้งหมด
-            }).then(canvas => {
-                // Convert to image and download
-                const link = document.createElement('a');
-                link.download = 'Sunday-Product-Structure.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                
-                // Restore button state and scroll position
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-                window.scrollTo(0, currentScroll);
-            }).catch(err => {
-                console.error("Error generating image: ", err);
-                alert("เกิดข้อผิดพลาดในการสร้างรูปภาพ กรุณาลองใหม่อีกครั้ง");
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-                window.scrollTo(0, currentScroll);
-            });
-        }
-    </script>
 </body>
 </html>
