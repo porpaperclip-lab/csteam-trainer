@@ -54,27 +54,25 @@
             padding: 30px 20px;
         }
         
+/* ================= Style สำหรับตัวอักษรในเมนู ================= */
 .navbar a {
     color: var(--text-muted);
     text-decoration: none;
-    font-size: 18px; /* แก้จาก 1.1rem เป็น 18px */
-    font-weight: 700;  /* แก้จาก 400 เป็น 700 (ตัวหนา) */
+    font-size: 16px; /* ลดขนาดตัวอักษรลง (ถ้ายังใหญ่ไป ปรับเป็น 14px หรือ 15px ได้ครับ) */
+    font-weight: 400; /* เปลี่ยนจาก 700 เป็น 400 เพื่อให้ตัวอักษรไม่หนา */
     padding: 12px 16px;
-    border-radius: 12px; /* หน้า 2 ใช้ 8px ถ้าอยากให้เหมือนเป๊ะแก้เป็น 8px ก็ได้ครับ */
-    transition: all 0.3s ease;
+    border-radius: 8px; /* หรือ 12px ตามที่คุณต้องการ */
+    transition: all 0.3s ease; /* ทำให้เอฟเฟคตอนชี้เมาส์ดูนุ่มนวลขึ้น */
     display: block;
-    line-height: 1.4; /* เพิ่มบรรทัดนี้เข้ามา */
+    line-height: 1.4;
 }
 
+/* ================= เอฟเฟคเวลาเอาเมาส์ไปชี้ (Hover) ================= */
 .navbar a:hover {
-    background-color: #f1f3f4;
-    color: var(--primary-color);
+    background-color: #f1f3f4; /* เปลี่ยนสีพื้นหลังเป็นสีเทาอ่อนๆ เวลาชี้ */
+    color: var(--primary-color); /* เปลี่ยนสีตัวอักษรและไอคอนเป็นสีฟ้าเวลาชี้ */
 }
-
-.navbar a.active {
-    background-color: var(--primary-color);
-    color: white;
-}
+        
         /* ================================================================= */
         /* รองรับหน้าจอขนาดเล็ก (มือถือ) */
         @media (max-width: 768px) {
@@ -97,11 +95,11 @@
 
    <!-- ================= ส่วนของแถบเมนูด้านบน ================= -->
     <nav class="navbar">
-        <div class="menu-header">MENU</div> <!-- ปรับแก้ตรงนี้ -->
-        <a href="https://porpaperclip-lab.github.io/csteamknowledgebase/#">🏠 หน้าแรก</a>
-        <a href="https://porpaperclip-lab.github.io/csteam-trainer/" class="active">📊 โครงสร้างผลิตภัณฑ์</a>
-        <a href="xxxx">🛠️ คู่มือการใช้งาน</a>
-    </nav>
+    <div class="menu-header">MENU</div>
+    <a href="https://porpaperclip-lab.github.io/csteamknowledgebase/#">🏠 หน้าแรก</a>
+    <a href="https://porpaperclip-lab.github.io/csteam-trainer/">📊 โครงสร้างผลิตภัณฑ์</a>
+    <a href="xxxx">🛠️ คู่มือการใช้งาน</a>
+</nav>
     <!-- ======================================================== -->
 
     <!-- The actual area of the content -->
