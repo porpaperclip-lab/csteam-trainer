@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -57,12 +57,13 @@
 .navbar a {
     color: var(--text-muted);
     text-decoration: none;
-    font-size: 1.1rem; /* ขนาดกลาง */
-    font-weight: 400;  /* ตัวหนา */
+    font-size: 18px; /* แก้จาก 1.1rem เป็น 18px */
+    font-weight: 700;  /* แก้จาก 400 เป็น 700 (ตัวหนา) */
     padding: 12px 16px;
-    border-radius: 12px;
+    border-radius: 12px; /* หน้า 2 ใช้ 8px ถ้าอยากให้เหมือนเป๊ะแก้เป็น 8px ก็ได้ครับ */
     transition: all 0.3s ease;
     display: block;
+    line-height: 1.4; /* เพิ่มบรรทัดนี้เข้ามา */
 }
 
 .navbar a:hover {
